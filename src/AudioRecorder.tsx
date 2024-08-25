@@ -1,6 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { Eraser, LetterText, Mic, Send } from 'lucide-react';
 
+const formFormat: any = {
+  nombre: "Nombre de la persona en formato string",
+  apellido: "Apellido de la persona en formato string",
+  documento: "Documento de la persona en formato numerico",
+  email: "Correo electronico de la persona en formato string",
+  pais: "Pais de la persona en formato string",
+  provincia: "Provincia de la persona en formato string",
+  ciudad: "Ciudad de la persona en formato string",
+  comentario: "Comentario de la persona en formato string"
+};
+
 const AudioRecorder = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
@@ -58,6 +69,7 @@ const AudioRecorder = () => {
     // if (!audioBlob && !uploadedFile) return;
     const formData = new FormData();
     formData.append('files', audioBlob ? audioBlob : uploadedFile!) // uploadFile! - Le estás asegurando al compilador que esa variable definitivamente no es null o undefined en ese momento.
+    formData.append('form_format', JSON.stringify(formFormat));
 
     const response = await fetch('http://localhost:8000/whisper/', {
       method: 'POST',
@@ -65,6 +77,7 @@ const AudioRecorder = () => {
     });
 
     const data = await response.json();
+    console.log(data.results[0].transcript);
     setTranscript(data.results[0].transcript);
 
     setIsLoading(false);
@@ -143,7 +156,7 @@ const AudioRecorder = () => {
                     {transcript && (
                       <div className='mt-4 text-md'>
                         <h3 className='font-semibold'>Transcripción:</h3>
-                        <p>{transcript}</p>
+                        <p>{JSON.stringify(transcript)}</p>
                       </div>
                     )}
                 </form>
