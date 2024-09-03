@@ -72,6 +72,8 @@ const RecorderWhisper = ({ formFormat, onTranscript }: Promps) => {
 
   return (
     <React.Fragment>
+        <div className='flex justify-end gap-2'>
+
           {/* Grabar audio */}
           {isRecording && 
             (<div className="flex justify-end items-center gap-x-2">
@@ -81,13 +83,14 @@ const RecorderWhisper = ({ formFormat, onTranscript }: Promps) => {
           }
 
           {/* {audioBlob && <audio className='w-full h-10' controls src={URL.createObjectURL(audioBlob)} />} */}
+        
 
           {
             (transcript === '' && !isLoading) && 
               <button 
                 type='button' 
                 onClick={isRecording ? stopRecording : startRecording} 
-                className='px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-md disabled:bg-slate-400' 
+                className='mt-4 px-3.5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-md disabled:bg-slate-400' 
                 disabled={!!audioBlob}
               >
                 {isRecording 
@@ -97,27 +100,30 @@ const RecorderWhisper = ({ formFormat, onTranscript }: Promps) => {
               </button>    
           }
 
+        
           {
             (audioBlob && !isLoading) && 
               <button 
                 type='button' 
                 onClick={resetFiles} 
-                className='px-4 py-2 bg-transparent hover:bg-red-400 border border-red-400 text-red-600 hover:text-white rounded-md'
+                className='mt-4 px-4 py-2 bg-transparent hover:bg-slate-400 border border-slate-400 text-slate-600 hover:text-white rounded-md'
               >
-                <Eraser className='inline size-5 mr-1'/>
+                <Eraser className='inline size-4 mr-1'/> Reset
               </button>    
           }
           
           {
             isLoading && <p className='text-center mt-4'><LetterText className='inline size-5 mr-1'/>Transcribiendo...</p>
           }
+        </div>
+          
 
-          {transcript && (
+          {/* {transcript && (
             <div className='mt-4 text-md'>
               <h3 className='font-semibold'>Transcripción:</h3>
               <p>{JSON.stringify(transcript)}</p>
             </div>
-          )}
+          )} */}
     </React.Fragment>
   );
 };

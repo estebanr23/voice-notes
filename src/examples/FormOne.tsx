@@ -2,6 +2,7 @@ import { Button, Label, Select, Textarea, TextInput } from "flowbite-react";
 import React from "react";
 import useForm from "../hooks/useForm";
 import TranscribeWhisper from "../TranscribeWhisper";
+import RecorderWhisper from "../RecorderWhisper";
 // import RecorderWhisper from "../RecorderWhisper";
 
 const formFormat: any = {
@@ -115,7 +116,7 @@ const FormOne = () => {
                 <Label htmlFor="pais" value="Paises" />
               </div>
               <Select id="pais" name="pais" value={pais} onChange={e => onChangeInputValue(e)}>
-                <option value="" disabled>Seleccionar pais</option>
+                <option value="">Seleccionar pais</option>
                 <option value="Estados Unidos">Estados Unidos</option>
                 <option value="Argentina">Argentina</option>
                 <option value="Brasil">Brasil</option>
@@ -127,7 +128,7 @@ const FormOne = () => {
                 <Label htmlFor="provincia" value="Provincia" />
               </div>
               <Select id="provincia" name="provincia" value={provincia} onChange={e => onChangeInputValue(e)}>
-                <option value="" disabled>Seleccionar pais</option>
+                <option value="">Seleccionar provincia</option>
                 <option value="Catamarca">Catamarca</option>
                 <option value="Buenos Aires">Buenos Aires</option>
                 <option value="Tucuman">Tucuman</option>
@@ -148,7 +149,7 @@ const FormOne = () => {
             </div>
             <Textarea id="Comentario" name="comentario" placeholder="Escriba un comentario..." value={comentario} onChange={e => onChangeInputValue(e)} rows={4} />
           </div>
-
+          
           <TranscribeWhisper formFormat={formFormat} onTranscript={handleTranscript} />
 
           <div className="flex justify-end gap-x-2">
